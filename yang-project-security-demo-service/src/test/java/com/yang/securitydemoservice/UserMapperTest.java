@@ -20,7 +20,7 @@ import java.util.List;
  * @author YangAns
  * @since 2024/9/26
  */
-@SpringBootTest(classes = DemoApplication.class)
+@SpringBootTest(classes = SecurityDemoApplication.class)
 public class UserMapperTest {
 
 

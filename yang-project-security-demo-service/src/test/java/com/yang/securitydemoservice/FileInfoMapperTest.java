@@ -14,7 +14,7 @@ import org.springframework.boot.test.context.SpringBootTest;
  * @author YangAns
  * @since 2024/10/10
  */
-@SpringBootTest(classes = DemoApplication.class)
+@SpringBootTest(classes = SecurityDemoApplication.class)
 public class FileInfoMapperTest {
 
 

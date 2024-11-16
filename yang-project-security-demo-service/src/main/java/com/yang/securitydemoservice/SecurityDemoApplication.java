@@ -12,10 +12,10 @@ import org.springframework.boot.SpringApplication;
  * @since 2024/9/19
  */
 @EnableSpringApplication
-public class DemoApplication {
+public class SecurityDemoApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(DemoApplication.class, args);
+        SpringApplication.run(SecurityDemoApplication.class, args);
     }
 
 }

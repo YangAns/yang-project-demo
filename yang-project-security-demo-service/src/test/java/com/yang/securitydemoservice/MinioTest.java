@@ -19,7 +19,7 @@ import java.io.FileInputStream;
  * @author YangAns
  * @since 2024/10/4
  */
-@SpringBootTest(classes = DemoApplication.class)
+@SpringBootTest(classes = SecurityDemoApplication.class)
 public class MinioTest {
     @Autowired
     private MinioClient minioClient;
