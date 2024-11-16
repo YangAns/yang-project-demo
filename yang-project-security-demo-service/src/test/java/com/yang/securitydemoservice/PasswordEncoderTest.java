@@ -12,7 +12,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
  * @author YangAns
  * @since 2024/11/4
  */
-@SpringBootTest(classes = DemoApplication.class)
+@SpringBootTest(classes = SecurityDemoApplication.class)
 public class PasswordEncoderTest {
 
     @Test
