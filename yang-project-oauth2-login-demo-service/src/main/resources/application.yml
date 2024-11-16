@@ -1,0 +1,67 @@
+server:
+  port: 8092
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/gd_lgbj_test?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&useSSL=false&zeroDateTimeBehavior=convertToNull&allowMultiQueries=true
+    username: root
+    password: 123456
+    type: com.zaxxer.hikari.HikariDataSource
+  security:
+    user:
+      name: admin
+      password: 123456
+#    oauth2:
+#      client:
+#        registration:
+#          gitee:
+#            client-id: 547983061f2c5a2e7d59b24362e9322801
+#            client-secret: 547983061f2c5a2e7d59b24362e9322801
+  servlet:
+    multipart:
+      max-file-size: 100MB
+      max-request-size: 200MB
+  redis:
+    host: localhost
+    port: 6379
+    timeout: 10000
+    lettuce:
+      pool:
+        max-active: 8 # 连接池最大连接数
+        max-idle: 8  # 连接池最大空闲连接数
+        min-idle: 0  # 连接池最小空闲连接数
+        max-wait: 100  # 连接池最大阻塞等待时间（负数表示没有限制）
+        enabled: true # 是否启用连接池
+  profiles:
+    active: test
+mybatis-plus:
+  executor-type: reuse
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+logging:
+  level:
+    root: info
+    com.yang: debug
+framework:
+  minio:
+    access-key: BjZWzkkvMf96TM53WCrG
+    secret-key: VJmwPAkqWqaVXuAIyK075qNEIyxQ8Mbyx07SDww3
+    endpoint: http://192.168.149.111:9000
+    allow-file-types:
+      - jpg
+      - png
+      - jpeg
+      - pdf
+      - mp4
+  mybatis:
+    schema:
+      enable-auto-alter-table: true
+      enable-auto-alter-table-modify-column: true
+      enable-auto-alter-table-create: false
+      table-name-package: com.yang
+
+file:
+  minio:
+    enable: false
+
+

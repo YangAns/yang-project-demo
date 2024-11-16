@@ -1,0 +1,42 @@
+server:
+  port: 8091
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/gd_lgbj_test?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&useSSL=false&zeroDateTimeBehavior=convertToNull&allowMultiQueries=true
+    username: root
+    password: 123456
+    type: com.zaxxer.hikari.HikariDataSource
+  redis:
+    host: localhost
+    port: 6379
+    timeout: 10000
+    lettuce:
+      pool:
+        max-active: 8 # 连接池最大连接数
+        max-idle: 8  # 连接池最大空闲连接数
+        min-idle: 0  # 连接池最小空闲连接数
+        max-wait: 100  # 连接池最大阻塞等待时间（负数表示没有限制）
+        enabled: true # 是否启用连接池
+
+mybatis-plus:
+  executor-type: reuse
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+
+
+logging:
+  level:
+    root: info
+    com.yang: debug
+
+framework:
+  mybatis:
+    schema:
+      enable-auto-alter-table: true
+      enable-auto-alter-table-modify-column: true
+      enable-auto-alter-table-create: false
+      table-name-package: com.yang
+
+
