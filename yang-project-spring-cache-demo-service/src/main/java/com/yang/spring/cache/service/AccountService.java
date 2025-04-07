@@ -1,4 +1,4 @@
-package com.yang.spring.cache;
+package com.yang.spring.cache.service;
 
 import com.yang.spring.cache.domain.Account;
 import com.yang.spring.cache.mapper.AccountMapper;
@@ -23,7 +23,7 @@ public class AccountService {
 
 
     // 缓存查询结果：如果缓存存在，直接返回，不执行方法体
-    @Cacheable(value = "users", key = "#id")
+    @Cacheable(cacheNames = "account",key = "#id")
     public Account getUserById(Long id) {
         System.out.println("查询数据库 -> User ID: " + id);
         return accountMapper.selectById(id);

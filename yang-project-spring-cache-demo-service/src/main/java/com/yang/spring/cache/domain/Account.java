@@ -17,7 +17,7 @@ import java.math.BigDecimal;
  */
 @Data
 @TableName("account")
-public class Account {
+public class Account implements java.io.Serializable{
 
     @TableId(type = IdType.AUTO)
     private Integer id;

@@ -1,6 +1,13 @@
 spring:
   cache:
     type: redis
+    redis:
+      cache-null-values: false  # 不缓存null值
+      time-to-live: 1h # 缓存过期时间
+      key-prefix: "cache:" # 缓存前缀
+  redis:
+    host: localhost
+    port: 6379
 
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -11,5 +18,5 @@ spring:
 
 mybatis-plus:
   configuration:
-    log-impl: org.apache.ibatis.logging.slf4j.Slf4jImpl
     map-underscore-to-camel-case: true
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
