@@ -7,7 +7,6 @@ import org.springframework.security.config.annotation.web.configurers.AbstractHt
 import org.springframework.security.web.authentication.logout.LogoutFilter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.security.web.util.matcher.RequestMatcher;
-import org.springframework.stereotype.Component;
 
 /**
  * <p>
@@ -17,7 +16,7 @@ import org.springframework.stereotype.Component;
  * @author YangAns
  * @since 2024/10/26
  */
-@Component
+//@Component
 public class UserLoginConfigurer <H extends HttpSecurityBuilder<H>> extends AbstractHttpConfigurer<UserLoginConfigurer<H>, H> {
 
     private CustomAuthenticationFailureHandler CustomAuthenticationFailureHandler;

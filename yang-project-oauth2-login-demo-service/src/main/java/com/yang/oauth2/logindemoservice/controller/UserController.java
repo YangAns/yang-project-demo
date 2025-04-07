@@ -33,7 +33,7 @@ public class UserController {
             jwt.getClaims().forEach((k, v) -> System.out.println(k + " : " + v));
         }
         OAuth2AccessToken oAuth2AccessToken = tokenStore.readAccessToken("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MzE3MTYwMTksInVzZXJfbmFtZSI6InpzIiwianRpIjoiYjk4NDgxNGUtYzJhMS00ZmUxLWEyZTMtMjVkMzlhNWU3YzljIiwiY2xpZW50X2lkIjoiWWFuZ0FucyIsInNjb3BlIjpbImFsbCJdfQ.4CQlXyyyWpxySsAdXhusscOlh71BQRM5apgnsotHbNU");
-        System.out.println(oAuth2AccessToken);
+        System.out.println( oAuth2AccessToken);
 //        oAuth2AccessToken.isExpired()
 
 

@@ -31,8 +31,4 @@ public class CustomFilter extends OncePerRequestFilter {
         System.out.println("Request URL: " + request.getRequestURI() + " | Time Taken: " + duration + "ms");
     }
 
-    @Override
-    protected boolean shouldNotFilter(HttpServletRequest request) throws ServletException {
-        return true;
-    }
 }

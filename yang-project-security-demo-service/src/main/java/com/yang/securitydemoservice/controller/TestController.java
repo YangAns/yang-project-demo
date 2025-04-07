@@ -9,14 +9,21 @@ import org.springframework.web.bind.annotation.RestController;
  * </p>
  *
  * @author YangAns
- * @since 2024/10/24
+ * @since 2024/12/4
  */
 @RestController
-@RequestMapping("/public")
-public class PublicController {
+@RequestMapping("/test")
+public class TestController {
 
-    @RequestMapping("/test")
-    public String test() {
-        return "hello";
+
+    @RequestMapping("/t1")
+    public void test1() {
+        System.out.println("test1");
+
     }
+
+
 }
+
+
+

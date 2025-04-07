@@ -1,5 +1,7 @@
-package com.yang.designpatternservice.templateMethod.service;
+package com.yang.designpatternservice.templateMethod.controller;
 
+import com.yang.designpatternservice.templateMethod.service.NotificationEmailSender;
+import com.yang.designpatternservice.templateMethod.service.PromotionalEmailSender;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

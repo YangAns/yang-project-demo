@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>WebSocket聊天室</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 0 20px;
+        }
+
+        .login-box {
+            margin-bottom: 20px;
+        }
+
+        .chat-box {
+            display: none;
+        }
+
+        .online-users {
+            float: left;
+            width: 200px;
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-right: 20px;
+        }
+
+        .messages {
+            height: 400px;
+            border: 1px solid #ccc;
+            margin-bottom: 10px;
+            padding: 10px;
+            overflow-y: auto;
+        }
+
+        .message {
+            margin: 10px 0;
+            padding: 8px;
+            background: #f0f0f0;
+            border-radius: 4px;
+        }
+
+        .system-msg {
+            color: #666;
+            font-style: italic;
+        }
+
+        .self-msg {
+            background: #e3f2fd;
+        }
+
+        input[type="text"],
+        input[type="password"] {
+            padding: 8px;
+            width: 200px;
+            margin-right: 5px;
+        }
+
+        button {
+            padding: 8px 15px;
+            background: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #45a049;
+        }
+    </style>
+</head>
+
+<body>
+<!-- 登录界面 -->
+<div class="login-box">
+    <h2>用户登录</h2>
+    <input type="text" id="username" placeholder="用户名">
+    <input type="password" id="password" placeholder="密码（统一123）">
+    <button onclick="login()">登录</button>
+</div>
+
+<!-- 聊天界面 -->
+<div class="chat-box">
+    <div class="online-users">
+        <h3>在线用户 (<span id="online-count">0</span>)</h3>
+        <ul id="user-list"></ul>
+    </div>
+
+    <div style="overflow: hidden;">
+        <div class="messages" id="messages"></div>
+        <div>
+            <input type="text" id="message-input" placeholder="输入消息" disabled>
+            <button onclick="sendMessage()" disabled>发送</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    let websocket = null;
+    let currentUser = null;
+    let selectedUser = null;
+
+    // 1. 登录功能
+    async function login() {
+        const username = document.getElementById('username').value.trim();
+        const password = document.getElementById('password').value.trim();
+
+        // 调用登录接口
+        const params = new URLSearchParams();
+        params.append('username', username);
+        params.append('password', password);
+
+        try {
+            const response = await fetch('/login?' + params.toString(), {
+            });
+            const result = await response.json();
+
+            if (result.code === 200) {
+
+                console.log(document.cookie);
+
+                // 获取当前用户名
+                const userResponse = await fetch("/getUserName", {
+                    method: "GET",
+                })
+                currentUser = await userResponse.text();
+                initWebSocket();
+                showChatUI();
+            } else {
+                alert('登录失败: ' + result.msg);
+            }
+        } catch (error) {
+            alert('请求失败: ' + error.message);
+        }
+    }
+
+    // 2. 初始化WebSocket
+    function initWebSocket() {
+        const jsessionid = document.cookie
+            .split('; ')
+            .find(row => row.startsWith('JSESSIONID='))
+            ?.split('=')[1];
+        console.log(jsessionid);
+        websocket = new WebSocket(`ws://localhost:8080/chat?JSESSIONID=${jsessionid}`);
+        websocket.onopen = () => {
+            console.log('WebSocket连接已建立');
+        };
+        websocket.onmessage = (event) => {
+            const msg = JSON.parse(event.data);
+            console.log(msg);
+            if (msg.isSystem) {
+                // 系统消息（更新在线列表）
+                updateOnlineUsers(msg.message);
+            } else {
+                // 用户消息
+                showMessage(msg.fromUser, msg.message, false);
+            }
+        };
+        websocket.onerror = (error) => {
+            console.error('WebSocket错误:', error);
+        };
+
+        websocket.onclose = () => {
+            console.log('连接已关闭');
+        };
+    }
+
+    // 3. 显示聊天界面
+    function showChatUI() {
+        document.querySelector('.login-box').style.display = 'none';
+        document.querySelector('.chat-box').style.display = 'block';
+        document.getElementById('message-input').disabled = false;
+        document.querySelector('button[onclick="sendMessage()"]').disabled = false;
+    }
+
+    // 4. 更新在线用户列表
+    function updateOnlineUsers(users) {
+        const userList = document.getElementById('user-list');
+        userList.innerHTML = '';
+
+        users.forEach(user => {
+            const li = document.createElement('li');
+            li.innerHTML = `<a href="#" onclick="selectUser('${user}')">${user}</a>`;
+            userList.appendChild(li);
+        });
+
+        document.getElementById('online-count').textContent = users.length;
+    }
+
+    // 5. 选择用户
+    function selectUser(username) {
+        selectedUser = username;
+        document.getElementById('message-input').placeholder = `发送给 ${username}`;
+    }
+
+    // 6. 发送消息
+    function sendMessage() {
+        const input = document.getElementById('message-input');
+        const message = input.value.trim();
+
+        if (!message || !selectedUser) {
+            alert('请选择用户并输入消息');
+            return;
+        }
+
+        // 构造消息对象
+        const msg = {
+            toName: selectedUser,
+            message: message
+        };
+
+        websocket.send(JSON.stringify(msg));
+        input.value = '';
+
+        // 本地显示自己发送的消息
+        showMessage(currentUser, message, true);
+    }
+
+    // 7. 显示消息
+    function showMessage(from, content, isSelf) {
+        const messagesDiv = document.getElementById('messages');
+        const div = document.createElement('div');
+        div.className = `message ${isSelf ? 'self-msg' : ''}`;
+
+        div.innerHTML = `
+                <div><b>${isSelf ? '你' : from}</b></div>
+                <div>${content}</div>
+                <div style="color: #666; font-size: 0.8em">${new Date().toLocaleTimeString()}</div>
+            `;
+
+        messagesDiv.appendChild(div);
+        messagesDiv.scrollTop = messagesDiv.scrollHeight;
+    }
+</script>
+</body>
+
+</html>

@@ -1,5 +1,6 @@
 package com.yang.oauth2.logindemoservice.config;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
@@ -23,16 +24,18 @@ import java.util.Collections;
  * @author YangAns
  * @since 2024/11/15
  */
+@Slf4j
 public class Oauth2AnonymousAuthenticationFilter extends OncePerRequestFilter {
 
-    private RequestMatcher requestMatcher = new AntPathRequestMatcher("/oauth/authorize/**");
+    private final RequestMatcher requestMatcher = new AntPathRequestMatcher("/oauth/authorize/**");
 
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
-        if (!requiresAuthentication(request, response)) {
+        if (!supportRequest(request, response)) {
             filterChain.doFilter(request, response);
         } else {
+            log.warn("匿名登录");
             SecurityContext context = SecurityContextHolder.createEmptyContext();
             Authentication authentication = new UsernamePasswordAuthenticationToken("zs","123", Collections.emptyList());
             context.setAuthentication(authentication);
@@ -43,7 +46,7 @@ public class Oauth2AnonymousAuthenticationFilter extends OncePerRequestFilter {
 
 
 
-    protected boolean requiresAuthentication(HttpServletRequest request, HttpServletResponse response) {
+    protected boolean supportRequest(HttpServletRequest request, HttpServletResponse response) {
         return this.requestMatcher.matches(request);
     }
 }

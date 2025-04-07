@@ -22,6 +22,13 @@
         <module>yang-project-demo-service</module>
         <module>yang-project-oauth2-login-demo-service</module>
         <module>yang-project-security-sdk</module>
+        <module>yang-project-sa-toekn-demo-service</module>
+        <module>yang-project-websocket-service</module>
+        <module>yang-project-webflux</module>
+        <module>yang-project-spring-demo-service</module>
+        <module>yang-project-quartz-demo-service</module>
+        <module>yang-project-mybatis-join-demo-service</module>
+        <module>yang-project-spring-cache-demo-service</module>
     </modules>
 
     <properties>
@@ -156,6 +163,4 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
-
-
 </project>

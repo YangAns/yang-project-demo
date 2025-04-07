@@ -56,7 +56,7 @@ public abstract class AbstractValidationService<T, E extends ValidationErrorVo> 
         return validationErrorVos;
     }
 
-    public abstract E doResult(int param, T t, List<String> errorMessages, List<String> errorFields, AtomicInteger errorCount);
+    protected abstract E doResult(int param, T t, List<String> errorMessages, List<String> errorFields, AtomicInteger errorCount);
 
     public void doOtherValidation(T t, Object param, List<String> errorMessages, List<String> errorFields, AtomicInteger errorCount) {
         //

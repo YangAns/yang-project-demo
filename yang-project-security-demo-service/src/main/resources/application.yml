@@ -11,6 +11,8 @@ spring:
     user:
       name: admin
       password: 123456
+      roles: ADMIN
+
   servlet:
     multipart:
       max-file-size: 100MB

@@ -299,7 +299,7 @@ public class YListUtils extends ListUtil {
 
     public static <O, T> List<T> list2list(List<O> os, Function<O, ? extends T> target, boolean needClearRepeat) {
         List<T> ts = new ArrayList<>();
-        if (null == os || os.size() == 0) {
+        if (null == os || os.isEmpty()) {
             return ts;
         }
         os.forEach(o -> {
@@ -314,7 +314,6 @@ public class YListUtils extends ListUtil {
                 }
             }
         });
-
         return ts;
     }
 

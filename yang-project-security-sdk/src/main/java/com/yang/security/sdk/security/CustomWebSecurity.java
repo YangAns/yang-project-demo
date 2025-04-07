@@ -27,5 +27,9 @@ public class CustomWebSecurity implements WebSecurityCustomizer {
                         "/webjars/**",
                         "/auth/**"
                 );
+
+        web.debug(true);
+
+
     }
 }

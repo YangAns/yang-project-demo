@@ -48,7 +48,6 @@ public class NameCache {
             return "";
         }
         String hashKey = toHashKey(prefix);
-
         String shareKey = hashKey + key;
         String shareName = Share.get(shareKey, String.class);
         if (null != shareName) {

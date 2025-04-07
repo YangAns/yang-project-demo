@@ -2,7 +2,6 @@ package com.yang.securitydemoservice.security;
 
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
-import org.springframework.stereotype.Component;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -17,7 +16,7 @@ import java.io.IOException;
  * @author YangAns
  * @since 2024/10/26
  */
-@Component
+//@Component
 public class CustomAuthenticationFailureHandler implements AuthenticationFailureHandler {
 
     @Override

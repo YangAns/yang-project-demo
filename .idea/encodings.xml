@@ -6,9 +6,17 @@
     <file url="file://$PROJECT_DIR$/yang-project-common-sdk/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/yang-project-demo-service/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/yang-project-design-pattern-service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/yang-project-mybatis-join-demo-service/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/yang-project-oauth2-login-demo-service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/yang-project-quartz-demo-service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/yang-project-sa-toekn-demo-service/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/yang-project-security-demo-service/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/yang-project-security-sdk/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/yang-project-spring-ai-demo-service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/yang-project-spring-cache-demo-service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/yang-project-spring-demo-service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/yang-project-webflux/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/yang-project-websocket-service/src/main/java" charset="UTF-8" />
     <file url="PROJECT" charset="UTF-8" />
   </component>
 </project>

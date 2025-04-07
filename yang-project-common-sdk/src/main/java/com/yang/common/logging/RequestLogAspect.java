@@ -48,9 +48,6 @@ public class RequestLogAspect {
 //        Method method = signature.getMethod();
 //        String name1 = method.getName();
 //        Class<?> returnType1 = method.getReturnType();
-
-
-
         //获取request对象
         HttpServletRequest request = YRequestUtils.getRequest();
         if (request == null) {
