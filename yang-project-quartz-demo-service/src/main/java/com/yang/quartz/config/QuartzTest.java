@@ -34,6 +34,9 @@ public class QuartzTest {
         scheduler.start();
         //把SimpleTrigger和JobDetail注册给调度器
         scheduler.scheduleJob(jobDetail,trigger);
+
+        //关闭调度器
+        scheduler.shutdown();
     }
 
 
